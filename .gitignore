@@ -1,0 +1,14 @@
+# Operating-system files
+.DS_Store
+Thumbs.db
+
+# Local environment files. Keep shareable examples under version control.
+.env
+.env.*
+!.env.example
+
+# Editor-local state
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
