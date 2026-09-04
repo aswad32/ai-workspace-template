@@ -7,11 +7,12 @@ Released under the [MIT License](LICENSE).
 
 ## What it provides
 
-- A consistent lifecycle: initialize, specify, plan, execute, review, remediate,
-  verify, commit, and publish.
+- A consistent lifecycle: initialize, specify, analyze, approve, execute, verify,
+  review, remediate, publish, and close.
 - Reusable SDD templates that work for services, clients, data changes,
   integrations, operations, and documentation work.
-- Agent workflows with scoped context loading, safety rules, and stable review
+- Agent workflows with scoped context loading, explicit human approval,
+  requirement traceability, spec-conformance checks, safety rules, and stable
   finding IDs.
 - A project-context bootstrap so commands do not assume a framework, branch,
   package manager, test command, or ticketing system.
@@ -25,10 +26,10 @@ Released under the [MIT License](LICENSE).
 2. Start a coding-agent session and ask it to follow
    `.agents/commands/init-project.md`. Agents that support repository command
    routing can use `/init-project` directly.
-3. Create `.agents/project-context.md` from the included template. Record the
-   base branch, validation commands, source layout, tracker choice, and
-   applicable domain/security invariants.
-4. Ask the agent to follow `.agents/commands/spec.md` for the first feature.
+3. Review the generated `.agents/project-context.md`, correct any inferred
+   facts, and commit it when the project's policy permits shared agent context.
+4. Ask the agent to follow `.agents/commands/spec.md` for the first feature,
+   then analyze and approve the package before implementation.
 
 ### Agent Compatibility
 
@@ -40,6 +41,29 @@ follow. Agents that read `AGENTS.md` can use it as the repository entry point.
 Read [AGENTS.md](AGENTS.md) for the shared rules and [templates/README.md](templates/README.md)
 for the template flow.
 
+### Core Lifecycle
+
+```text
+init → spec → analyze → approve → execute ⇄ verify-spec
+                                      ↓
+                      review → remediate → verify-remediate
+                                      ↓
+                              commit → PR → close-spec
+```
+
+`/analyze-project` can document an existing system before feature work.
+`/design-architecture` is a separate, explicit workflow for architecture design;
+`/init-project` does not silently create or redesign architecture.
+
+### When a Full Package Is Useful
+
+Use a spec package when agreement matters: user-visible behavior, shared
+contracts, data or security boundaries, migrations, integrations, operational
+risk, or work spanning several coordinated steps. A tiny factual documentation
+correction or a confirmed narrow defect can use the direct documentation or
+`/fix` path while still following project context, validation, review, and branch
+rules. If a supposed fix needs a new product decision, treat it as a new spec.
+
 ## Included Workspace Structure
 
 - `docs/` provides neutral homes for architecture, design, data, setup, and ADRs.
@@ -47,9 +71,18 @@ for the template flow.
 - `memory/` holds concise durable project context that does not belong in a spec.
 - `specs/` holds SDD packages and their review artifacts.
 - `templates/` holds the canonical reusable SDD artifacts.
+- `examples/` demonstrates a completed package without prescribing a stack.
 
 These folders are intentionally included so repositories created from this GitHub
 template begin with the same predictable structure.
+
+## Template Revision and Updates
+
+The current workflow revision is recorded in [TEMPLATE_VERSION](TEMPLATE_VERSION)
+and changes are summarized in [CHANGELOG.md](CHANGELOG.md). Repositories created
+from this template are independent copies; updates are not applied automatically.
+Review the changelog, compare command and template files, and adopt migrations on
+a dedicated branch without overwriting project-specific context.
 
 ## Contributing and Security
 

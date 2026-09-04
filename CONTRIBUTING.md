@@ -14,11 +14,12 @@ Thanks for improving the AI SDD Starter.
 ## Development Approach
 
 1. Branch from the repository's current integration branch.
-2. Update the relevant command guide, template, and README documentation when
-   a workflow contract changes.
-3. Check Markdown links and review the diff for broken formatting, stale paths,
-   and unintended scope.
-4. Explain the motivation, user impact, and validation in the pull request.
+2. Update the relevant command guide, artifact template, lifecycle documentation,
+   validator, example, and changelog when a workflow contract changes.
+3. Run `python3 scripts/validate_sdd.py`, check Markdown links, and review the
+   diff for broken formatting, stale paths, and unintended scope.
+4. Explain the motivation, user impact, compatibility, migration needs, and
+   validation in the pull request.
 
 ## Proposing a New Workflow
 

@@ -1,20 +1,19 @@
-name: Markdown checks
+name: SDD and Markdown checks
 
 on:
   pull_request:
   push:
-    branches:
-      - main
-      - develop
 
 permissions:
   contents: read
 
 jobs:
-  links:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Validate SDD workspace
+        run: python3 scripts/validate_sdd.py
       - uses: lycheeverse/lychee-action@v2
         with:
           args: --offline --no-progress './**/*.md'

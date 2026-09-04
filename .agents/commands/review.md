@@ -24,11 +24,13 @@ SDD package, or under `specs/_reviews/` when no package applies.
    files, and secrets. Treat a suspected secret as Critical and do not echo it.
 5. Classify findings as Critical, High, Medium, or Low. Critical and High are
    `must-fix`; Medium is normally `should-fix`; Low is `could-fix`. Assign IDs
-   `PCR-<YYYYMMDDHHMM>-<NNN>`.
-6. Write `specs/<slug>/reviews/pre-commit-review-<timestamp>.md`, or
-   `specs/_reviews/` for ambiguous/non-package work. Include scope, context,
-   evidence, file/line references, remediation, validation gaps, and residual
-   risks. This report is the only permitted write during review.
+   `PCR-<YYYYMMDDTHHMMSSZ>-<NNN>` using UTC.
+6. Create the report from `templates/pre-commit-review.md` at
+   `specs/<slug>/reviews/pre-commit-review-<timestamp>.md`, or under
+   `specs/_reviews/` for non-package work. Include scope, context, evidence,
+   file/line references, remediation, validation gaps, and residual risks. Use
+   an unambiguous UTC timestamp. This report is the only permitted write during
+   review.
 7. Summarize findings, whether must-fix issues block the change, recommended
    focused validation, intentionally skipped broad checks, and the report path.
 
