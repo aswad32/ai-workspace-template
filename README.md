@@ -25,7 +25,9 @@ Released under the [MIT License](LICENSE).
    project repository.
 2. Start a coding-agent session and ask it to follow
    `.agents/commands/init-project.md`. Agents that support repository command
-   routing can use `/init-project` directly.
+   routing can use `/init-project` directly. On a fresh template-derived
+   repository, initialization treats unchanged starter files as scaffolding and
+   begins by asking for the new project's identity.
 3. Review the generated `.agents/project-context.md`, correct any inferred
    facts, and commit it when the project's policy permits shared agent context.
 4. Ask the agent to follow `.agents/commands/spec.md` for the first feature,
@@ -54,6 +56,12 @@ init → spec → analyze → approve → execute ⇄ verify-spec
 `/analyze-project` can document an existing system before feature work.
 `/design-architecture` is a separate, explicit workflow for architecture design;
 `/init-project` does not silently create or redesign architecture.
+
+Optional workflow notifications follow the
+[low-noise notification contract](.agents/workflow-notifications.md). The
+starter announces only newly created issues and specs that have completed
+analysis, received explicit human approval, and become ready to implement;
+draft creation and analysis remain silent.
 
 ### When a Full Package Is Useful
 

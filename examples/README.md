@@ -5,3 +5,7 @@ fictional, technology-neutral example showing how approval, traceability,
 verification, and closure fit together. Its paths and evidence are illustrative;
 do not copy them into project context without confirming them in the target
 repository.
+
+The [fresh-template initialization scenario](init-project-fresh-template.md)
+documents how `/init-project` must distinguish reusable starter scaffolding from
+facts about a newly created project.

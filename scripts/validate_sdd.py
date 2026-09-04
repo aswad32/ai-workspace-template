@@ -49,6 +49,48 @@ REQUIRED_TEMPLATES = {
     "remediation.md",
     "verification.md",
 }
+REQUIRED_INIT_CONTRACT = {
+    "## Evidence Classification",
+    "Starter scaffold content is never a fallback source for project identity.",
+    "## Initialization Scenarios",
+    "### Fresh Template-Derived Repository",
+    "The first survey question must be: `What name should be used for this",
+}
+REQUIRED_NOTIFICATION_CONTRACTS = {
+    ".agents/workflow-notifications.md": {
+        "## Configuration Readiness",
+        "## Setup Diagnostic Output",
+        "`issue.created`",
+        "`spec.approved`",
+        "The message must say `Ready to implement`",
+        "Never retry an uncertain delivery automatically.",
+    },
+    ".agents/project-context.template.md": {
+        "## Workflow Notifications",
+        "- Notification status: Disabled | Planned | Ready",
+        "- Credential reference:",
+        "- Enabled events: `issue.created`, `spec.approved`, both, or `None`",
+        "- Setup requirements:",
+        "- Last verified:",
+    },
+    ".agents/commands/spec.md": {
+        "Do not send workflow notifications for spec",
+    },
+    ".agents/commands/approve-spec.md": {
+        "evaluate `spec.approved`",
+        "already `Sent` for the current approval",
+    },
+    ".agents/commands/capture-issues.md": {
+        "evaluate `issue.created`",
+        "Do not emit the event",
+    },
+    ".agents/commands/execute-spec.md": {
+        "stop unless `Approval notification` records `Sent`",
+    },
+    "templates/spec.md": {
+        "- Approval notification:",
+    },
+}
 ACTIVE_OR_LATER = {"Ready", "In Progress", "Implemented", "Done"}
 IMPLEMENTED_OR_LATER = {"Implemented", "Done"}
 
@@ -102,6 +144,29 @@ def check_workspace_contract(errors: list[str]) -> None:
     version = (ROOT / "TEMPLATE_VERSION")
     if not version.exists() or not version.read_text(encoding="utf-8").strip():
         errors.append("TEMPLATE_VERSION is missing or empty")
+
+    init_path = commands_dir / "init-project.md"
+    if init_path.exists():
+        init_text = init_path.read_text(encoding="utf-8")
+        for required_text in sorted(REQUIRED_INIT_CONTRACT):
+            if required_text not in init_text:
+                errors.append(
+                    "init-project workflow is missing fresh-template contract: "
+                    f"{required_text}"
+                )
+
+    for relative_path, required_phrases in REQUIRED_NOTIFICATION_CONTRACTS.items():
+        contract_path = ROOT / relative_path
+        if not contract_path.exists():
+            errors.append(f"missing workflow notification contract: {relative_path}")
+            continue
+        contract_text = contract_path.read_text(encoding="utf-8")
+        for required_text in sorted(required_phrases):
+            if required_text not in contract_text:
+                errors.append(
+                    f"{relative_path}: missing workflow notification contract: "
+                    f"{required_text}"
+                )
 
 
 def artifact_status(path: Path, errors: list[str]) -> str | None:

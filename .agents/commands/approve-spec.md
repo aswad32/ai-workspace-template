@@ -21,18 +21,31 @@ implementation may begin.
 4. Record `Approval: Approved`, the provided approver identity or
    `Human user (interactive approval)`, and the approval date in `spec.md`. Set
    `spec.md`, `plan.md`, and `task.md` to `Ready` and link the approved spec from
-   the plan.
+   the plan. Ensure `Approval notification` exists; treat it as `Not evaluated`
+   when adopting this workflow in an older package.
 5. Mark only the analysis and approval items in the task readiness gate. Leave
    branch, inspection, and other runtime checks unchanged until verified.
-6. Report the approved package, analysis report, approver record, and next action
-   `/execute <spec-slug>`.
+6. After verifying that approval and all three `Ready` statuses were persisted,
+   evaluate `spec.approved` using `.agents/workflow-notifications.md` and the
+   project-context notification configuration. Do not send if the event is not
+   enabled or `Approval notification` is already `Sent` for the current approval
+   cycle. Record `Not configured`, `Disabled`, or `Not subscribed` when that is
+   the applicable disposition.
+7. If configuration is `Planned` or incomplete, record `Pending setup`, list the
+   exact missing prerequisites, and provide a copy-ready message. If it is
+   `Ready`, follow its preview or explicitly authorized automatic-send policy,
+   then record `Not sent`, `Sent` with a non-secret result, `Failed`, or
+   `Delivery uncertain` in `Approval notification`.
+8. Report the approved package, analysis report, approver record, notification
+   disposition, and next action `/execute <spec-slug>`.
 
 ## Approval Invalidation
 
 Any later material change to scope, requirements, acceptance criteria,
 architecture, contracts, data, security, quality targets, operations,
 validation, or user-visible behavior must set `Approval: Invalidated`, return all
-three artifacts to `Draft`, and require a new analysis and approval cycle.
+three artifacts to `Draft`, reset `Approval notification` to `Not evaluated`,
+and require a new analysis and approval cycle.
 
 ## Stop Conditions
 

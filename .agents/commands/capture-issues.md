@@ -29,9 +29,24 @@ records a problem; it does not implement a fix.
    existing rows.
 6. Verify the tracker reference, index uniqueness, Markdown links, and diff.
    For an index-only change, run textual checks rather than unrelated code tests.
+7. Only when this run created and verified a new canonical tracker item or
+   persisted local issue note, evaluate `issue.created` using
+   `.agents/workflow-notifications.md` and project context. Do not emit the event
+   for a duplicate or an update to an existing issue.
+8. If notification setup is `Planned` or incomplete, list every missing
+   prerequisite and provide a copy-ready message without attempting delivery.
+   If it is `Ready`, follow the configured preview or explicitly authorized
+   automatic-send policy. Redact sensitive evidence and never send a local
+   filesystem URL.
+9. Record and report the notification disposition separately. A delivery
+   failure must not undo or duplicate the issue; never retry an uncertain send
+   automatically.
 
 ## Output
 
 Report the canonical tracker reference (or the local-note decision), impacted
 packages, reproduction/trace result, branch, validation, redactions, and
-remaining uncertainty.
+remaining uncertainty. Also report notification status as `Sent`,
+`Not sent`, `Not subscribed`, `Disabled`, `Not configured`, `Pending setup`,
+`Failed`, or `Delivery uncertain`, including actionable missing setup when
+applicable.

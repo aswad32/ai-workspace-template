@@ -10,6 +10,7 @@
 - Approval: Approved
 - Approved by: Example product owner
 - Approved on: 2026-09-01
+- Approval notification: Not configured
 - Latest spec analysis: [passing analysis](reviews/spec-analysis-20260901T100000Z.md)
 - Tracking reference: EXAMPLE-42
 - Project context: `.agents/project-context.md`

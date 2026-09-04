@@ -10,6 +10,7 @@
 - Approval: Pending | Approved | Invalidated
 - Approved by: <name, team, or `Not approved`>
 - Approved on: <YYYY-MM-DD or `Not approved`>
+- Approval notification: Not evaluated | Not configured | Disabled | Not subscribed | Pending setup: <missing prerequisites> | Not sent: <date and reason> | Sent: <date and non-secret reference> | Failed: <date and reason> | Delivery uncertain: <date and reason>
 - Latest spec analysis: <relative report link or `Not run`>
 - Tracking reference: <ticket URL/ID, or `None`>
 - Project context: `.agents/project-context.md`

@@ -13,28 +13,77 @@ inventing technical decisions or exposing sensitive information.
 1. Inspect the repository at a high level: current branch, project manifests,
    source folders, existing documentation, test/build scripts, and tracker or
    hosting metadata when present.
-2. Run the adaptive survey below. Ask only for facts that remain unknown,
+2. Classify each observation as starter scaffolding or project-owned evidence
+   before using it to answer survey questions. Follow the evidence rules and
+   fresh-template baseline below.
+3. Run the adaptive survey below. Ask only for facts that remain unknown,
    ambiguous, or conflicting after the repository inspection. Ask one question
    at a time and wait for the user's answer before continuing.
-3. Ensure the starter workspace exists. Create any missing `docs/`, `skills/`,
+4. Ensure the starter workspace exists. Create any missing `docs/`, `skills/`,
    `memory/`, `specs/`, and `templates/` directories, preserving existing
    content. Use the starter README files and placeholders when available; do
    not overwrite project documentation or replace a project’s own templates.
    Create `specs/_reviews/` when review reports will be stored locally.
-4. Create `.agents/project-context.md` from
+5. Create `.agents/project-context.md` from
    `.agents/project-context.template.md` on a dedicated setup/docs branch unless
    the human explicitly authorizes bootstrap work on the current branch.
-5. Replace placeholders with observed or confirmed facts. Use `Not established`,
+6. Replace placeholders with observed or confirmed facts. Use `Not established`,
    `Not available`, or `Not applicable` where a decision has not been made; do
    not guess commands or paths.
-6. If optional docs or prompt wrappers are referenced, either create them as
+7. If optional docs or prompt wrappers are referenced, either create them as
    part of the setup or mark them absent in project context. Do not design or
    author an architecture document during initialization unless the user
    explicitly adds that work to the scope.
-7. Inspect the resulting diff and validate Markdown paths and commands against
+8. Inspect the resulting diff and validate Markdown paths and commands against
    the repository. Run `python3 scripts/validate_sdd.py` when that script is
    present. Do not run unavailable project commands merely because the template
    lists them.
+
+## Evidence Classification
+
+Treat unchanged starter content as a starter scaffold, not as facts about the
+project that was created from it. Scaffold content can prove that the SDD
+workflow is installed, but it must not be used as project evidence for the
+project name, purpose, users, lifecycle state, ownership, application stack,
+source layout, validation commands, base branch, tracker, or delivery process.
+
+Common scaffold signals include:
+
+- `.agents/project-context.md` is absent while
+  `.agents/project-context.template.md` is present;
+- the root README still describes an SDD starter or reusable template rather
+  than the application being initialized;
+- placeholder values such as `[Project Name]` remain;
+- canonical workflow content is present in `.agents/commands/`, `templates/`,
+  `examples/`, `specs/README.md`, `TEMPLATE_VERSION`, or `CHANGELOG.md`; and
+- no project-owned application manifest, source code, or non-placeholder
+  product documentation provides a different identity.
+
+Use multiple signals together. A single missing manifest does not prove that a
+repository is greenfield, and the current branch name does not establish the
+project's intended base branch.
+
+Project-owned evidence includes application manifests and source code,
+deliberately customized product documentation, existing project configuration,
+and repository metadata that clearly names the target project. Prefer evidence
+in this order: facts confirmed by the user, an existing project context,
+project-owned code or documentation, repository metadata, then unresolved.
+Starter scaffold content is never a fallback source for project identity.
+
+When an uninitialized starter scaffold is detected, use the fresh-template
+baseline:
+
+1. Briefly tell the user that starter scaffolding was detected and will not be
+   treated as project identity. Mention separately whether application evidence
+   was or was not found.
+2. Ask all five project-identity questions in order, one per turn, even when the
+   starter README appears to answer them.
+3. After identity is established, resume adaptive routing and skip only facts
+   supported by project-owned evidence or confirmed by the user.
+
+If the user says they are maintaining the starter template itself, record that
+as an explicit answer and continue adaptively. Do not infer template maintenance
+merely because the repository contains the canonical scaffold.
 
 ## Adaptive Survey
 
@@ -46,8 +95,9 @@ inventing technical decisions or exposing sensitive information.
 - Ask one concise question per turn. Do not combine unrelated topics in a
   single question.
 - Do not ask the user to repeat a fact that repository evidence establishes
-  confidently. When evidence is ambiguous or conflicting, present the observed
-  value and ask the user to confirm it.
+  confidently. Starter scaffold content does not meet this standard. When
+  evidence is ambiguous or conflicting, identify its source, present the
+  observed value, and ask the user to confirm it.
 - Adapt to the project state:
   - For a greenfield project, collect intended decisions and record undecided
     items as `Not established`; do not invent commands, paths, or conventions.
@@ -67,7 +117,9 @@ inventing technical decisions or exposing sensitive information.
 ### Question Routing
 
 Ask the applicable questions in this order. Each example prompt is a separate
-question and should be skipped when its answer is already established.
+question and should be skipped when its answer is already established. For an
+uninitialized starter scaffold, the five project-identity questions are a
+required baseline and must not be skipped based on starter content.
 
 1. Project identity and purpose
    - What name should be used for this project?
@@ -120,9 +172,52 @@ question and should be skipped when its answer is already established.
    - Which external systems or services are required?
    - What non-secret limitations, environments, ownership, or failure-handling
      constraints apply to each integration?
-9. User-interface guidance, when applicable
+9. Workflow notifications
+   - Should workflow notifications be disabled, or configured for newly created
+     issues, approved specs, or both?
+   - If notifications are disabled, skip the remaining notification questions.
+   - Which provider, delivery method, and non-secret destination should be used?
+   - What connected-account or secret reference will identify authentication
+     without storing the credential value?
+   - Should delivery require a preview or use explicitly authorized automatic
+     sending?
+   - Who owns setup, what non-secret prerequisites remain, and where is the
+     setup guide?
+   - How will connectivity and posting permission be verified, and should a
+     notification failure warn or leave the command incomplete?
+10. User-interface guidance, when applicable
    - Which UI technology and design system or guidance should be used?
    - What accessibility and responsive-layout expectations apply?
+
+## Initialization Scenarios
+
+### Fresh Template-Derived Repository
+
+Given no `.agents/project-context.md`, an unchanged starter README and workflow
+files, and no project-owned application evidence:
+
+- Do not call the project `AI SDD Starter` or classify it as an existing
+  application.
+- Explain that the starter scaffold was detected and is being treated as
+  scaffolding.
+- The first survey question must be: `What name should be used for this
+  project?`
+- Continue through purpose, users or stakeholders, project state, and boundaries
+  one question at a time before routing to ownership and workflow topics.
+
+### Existing or Mixed Application with Starter Files
+
+When project-owned code or customized product documentation exists alongside
+starter files, use that evidence to describe what was observed, but still ask
+for confirmation wherever identity or lifecycle state is ambiguous. Never let
+an unchanged starter README override application evidence.
+
+### Starter Template Maintenance
+
+When the user explicitly confirms that the repository is the reusable starter
+itself, its template identity becomes user-confirmed project context. Continue
+the remaining survey without assuming that consuming-project runtime or source
+layout conventions apply to the starter.
 
 ## Completion Criteria
 
@@ -133,3 +228,7 @@ question and should be skipped when its answer is already established.
   recorded in project context.
 - Future `/spec`, `/execute`, `/fix`, `/commit`, and `/pr` commands can use the
   context without assuming a framework, package manager, tracker, or branch.
+- Workflow notifications may be `Disabled` or `Planned` without blocking project
+  initialization. When they are `Planned`, the context must identify the known
+  setup owner and missing prerequisites so later commands can explain why
+  delivery is unavailable.
