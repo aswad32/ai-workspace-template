@@ -9,6 +9,9 @@ Explain what changed and why.
 - Task: <link or `None`>
 - Tracking reference: <ticket URL/ID or `None`>
 - Closing reference: <for example `Closes #123`, or `None`>
+- Package approval: <approver/date or `Not applicable`>
+- Spec analysis: <report link or `Not applicable`>
+- Spec verification: <report link or `Not applicable`>
 
 ## Changes
 
@@ -39,6 +42,11 @@ Explain what changed and why.
 
 - Risks: <risk or `None`>
 - Rollback: <plan or `Not applicable`>
+
+## Delivery and Closure
+
+- Configured completion point: <merged, deployed, released, or `Not applicable`>
+- Evidence expected for `/close-spec`: <reference or `Not applicable`>
 
 ## Evidence
 

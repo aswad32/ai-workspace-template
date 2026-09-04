@@ -2,11 +2,20 @@
 
 ## Status
 
-- Status: Draft | Ready | In Progress | Done
+- Status: Draft | Ready | In Progress | Implemented | Done | Superseded | Abandoned
+- Change type: Feature | Refactor | Migration | Operations | Documentation | Research | Other
 - Owner: <name or team>
 - Created: <YYYY-MM-DD>
+- Last updated: <YYYY-MM-DD>
+- Approval: Pending | Approved | Invalidated
+- Approved by: <name, team, or `Not approved`>
+- Approved on: <YYYY-MM-DD or `Not approved`>
+- Latest spec analysis: <relative report link or `Not run`>
 - Tracking reference: <ticket URL/ID, or `None`>
 - Project context: `.agents/project-context.md`
+- Supersedes: <spec link(s) or `None`>
+- Superseded by: <spec link or `None`>
+- Delivery evidence: <PR, release, deployment, or `Not delivered`>
 
 ## Summary
 
@@ -22,9 +31,11 @@ Describe the user problem, intended outcome, and why it matters.
 
 ## Users and Use Cases
 
-| User | Need | Success outcome |
-|---|---|---|
-| <persona> | <need> | <observable outcome> |
+Use priority only when it helps define an independently deliverable slice.
+
+| ID | Priority | User or stakeholder | Need | Independent success outcome |
+|---|---|---|---|---|
+| US-001 | P1 | <persona> | <need> | <observable, independently testable outcome> |
 
 ## Current Behavior
 
@@ -37,7 +48,15 @@ Describe the user-visible or system outcome after the change.
 
 ## Functional Requirements
 
-- FR-1: <requirement>
+- FR-001: <testable requirement>
+
+## Quality Attributes
+
+Add only applicable, measurable constraints. Consider performance, scale,
+reliability, availability, observability, accessibility, localization,
+compatibility, recovery, and maintainability.
+
+- QR-001: <measurable quality requirement or `Not applicable`>
 
 ## Applicable Change Areas
 
@@ -52,6 +71,8 @@ for applicable areas.
 | Background processing | <Applicable / Not applicable> | <queue, schedule, retries, observability> |
 | External integration | <Applicable / Not applicable> | <provider, failure handling, data exchanged> |
 | Setup or operations | <Applicable / Not applicable> | <configuration, deployment, rollout> |
+| Shared library or contract | <Applicable / Not applicable> | <consumer impact, versioning, compatibility> |
+| Repository or infrastructure | <Applicable / Not applicable> | <CI/CD, build, hosting, cross-repository impact> |
 
 ## Security, Privacy, and Domain Rules
 
@@ -63,15 +84,29 @@ for applicable areas.
 
 ## Acceptance Criteria
 
-- AC-1: Given <context>, when <action>, then <verifiable outcome>.
+Each criterion must reference the requirement or user story it proves.
+
+- AC-001 (`FR-001`, `US-001`): Given <context>, when <action>, then <verifiable outcome>.
+
+## Success Measures
+
+Record observable product or operational outcomes separately from build
+acceptance. Use `Not applicable` when delivery itself is the only measure.
+
+- SC-001: <measurable outcome, owner, and observation window>
 
 ## Edge Cases
 
 - <edge case and expected behavior>
 
+## Assumptions
+
+- AS-001: <assumption, default, or `None`>
+
 ## Dependencies and Rollout
 
 - Dependencies: <prerequisite, integration, or `None`>
+- Compatibility/consumer impact: <breaking or non-breaking impact, or `None`>
 - Rollout/rollback considerations: <details or `None`>
 
 ## Open Questions
@@ -79,3 +114,10 @@ for applicable areas.
 - None
 
 Implementation must not start while this section contains unresolved questions.
+
+## Approval Gate
+
+The package may become `Ready` only after `/analyze-spec` passes and
+`/approve-spec` records explicit human approval. Material changes to scope,
+requirements, acceptance criteria, contracts, data, security, or user-visible
+behavior reset `Approval` to `Invalidated` and `Status` to `Draft`.
