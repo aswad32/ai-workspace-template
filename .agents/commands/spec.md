@@ -34,8 +34,10 @@ execution checklist. This command does not approve or implement the package.
    criterion through the plan and task list; label necessary supporting tasks.
 9. Inspect the three artifacts for contradictions, uncovered requirements,
    vague acceptance criteria, unresolved placeholders, and unnecessary scope.
-   Leave status `Draft` and approval `Pending`, then direct the user to
-   `/analyze-spec <spec-slug>` followed by `/approve-spec <spec-slug>`.
+   Leave status `Draft`, approval `Pending`, and `Approval notification` as
+   `Not evaluated`, then direct the user to `/analyze-spec <spec-slug>` followed
+   by `/approve-spec <spec-slug>`. Do not send workflow notifications for spec
+   creation, edits, or analysis.
 
 ## Stop Conditions
 

@@ -61,6 +61,23 @@ bracketed values. Keep this file concise, factual, and free of secrets.
 - Delivery completion point: <merged, deployed, released, or another observable event>
 - Deployment/release constraints: <rules or `Not applicable`>
 
+## Workflow Notifications
+
+- Notification status: Disabled | Planned | Ready
+- Provider: Slack | Teams | Other: <name> | None
+- Delivery method: Agent connector | Webhook | Repository automation | None
+- Destination: <non-secret channel/team identifier or `Not configured`>
+- Credential reference: <connected-account or secret reference, never its value; or `Not configured`>
+- Enabled events: `issue.created`, `spec.approved`, both, or `None`
+- Send policy: Preview first | Automatic | Not applicable
+- Automatic sending authorized by: <name, date, and scope; or `Not authorized`>
+- Setup owner: <person or team, or `Not established`>
+- Setup requirements: <non-secret prerequisites still needed or `Complete`>
+- Setup guide: <path/URL or `Not available`>
+- Last verified: <date and result, or `Never`>
+- Failure policy: Warn and continue | Require delivery | Not applicable
+- Message content restrictions: <rules or `None`>
+
 ## Governance and Decisions
 
 - Decision owners: <people or teams, or `Not established`>

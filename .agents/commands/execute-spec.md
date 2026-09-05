@@ -18,6 +18,9 @@ documentation, and proportionate verification.
 3. Stop unless the package is `Ready` or `In Progress`, its approval is current,
    and its latest spec analysis passed. Check the current branch and create or
    switch to a dedicated branch from the configured base branch before editing.
+   When project context enables `spec.approved` with failure policy
+   `Require delivery`, stop unless `Approval notification` records `Sent` for
+   the current approval cycle.
 4. Set the package to `In Progress`. Implement only applicable unchecked tasks
    and preserve task IDs and source references. Keep decisions, acceptance
    evidence, contracts, and verification notes synchronized with actual work.

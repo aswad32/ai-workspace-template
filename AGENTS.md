@@ -27,6 +27,8 @@ context is insufficient or a concrete safety risk requires it.
 - `.agents/commands/`: reusable agent workflows.
 - `.agents/project-context.md`: project-specific configuration and invariants
   (created during setup; not a template source of truth).
+- `.agents/workflow-notifications.md`: optional low-noise event and delivery
+  contract for newly created issues and approved specs.
 - `templates/`: canonical templates for specs, plans, task lists, issue indexes,
   reports, and pull requests.
 - `specs/<number>-<slug>/`: one SDD package per reviewable change.
@@ -136,7 +138,7 @@ Package status has consistent meaning:
 - `Superseded` or `Abandoned`: terminal states with a recorded reason and
   replacement reference when applicable.
 
-## 8. Tracker and Hosting Integrations
+## 8. Tracker, Hosting, and Notification Integrations
 
 The issue tracker and pull-request host are configured in project context.
 
@@ -146,3 +148,7 @@ The issue tracker and pull-request host are configured in project context.
   ticket.
 - Do not claim optional integrations, prompt wrappers, or automation files
   exist unless they are present in the repository.
+- Workflow notifications are optional. Emit only configured events after their
+  canonical issue creation or spec approval succeeds, and follow
+  `.agents/workflow-notifications.md` for readiness, redaction, authorization,
+  duplicate suppression, and failure handling.
