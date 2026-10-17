@@ -32,6 +32,10 @@ execution checklist. This command does not approve or implement the package.
 8. Fill only applicable change areas. Use stable `FR-`, `QR-`, `AC-`, `SC-`,
    `P-`, and `T-` IDs. Trace every buildable requirement and acceptance
    criterion through the plan and task list; label necessary supporting tasks.
+   When the package changes a rendered user interface, plan a test of the
+   affected user flow, including relevant states and project-context
+   accessibility and responsive expectations. Put the test and expected
+   evidence in the plan and task list, whether it will be automated or manual.
 9. Inspect the three artifacts for contradictions, uncovered requirements,
    vague acceptance criteria, unresolved placeholders, and unnecessary scope.
    Leave status `Draft`, approval `Pending`, and `Approval notification` as

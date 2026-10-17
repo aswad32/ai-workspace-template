@@ -12,4 +12,6 @@ Use this optional index when the project context enables an external tracker.
 - Use the configured tracker’s URL/identifier and actual status.
 - Update an existing row when new investigation details are captured; do not
   create duplicates.
+- During `/close-spec`, reflect each linked item's verified tracker status.
+  Package closure alone does not mean every linked issue is closed.
 - Do not include secrets, customer data, or private provider payloads.

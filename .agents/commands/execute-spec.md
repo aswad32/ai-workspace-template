@@ -31,7 +31,17 @@ documentation, and proportionate verification.
    integrations, data integrity, UI guidance, documentation, and operations.
 6. Run the focused project-context checks first. Escalate to broader tests,
    builds, migrations, audits, or end-to-end checks only when the changed risk
-   boundary requires them. Record skipped checks and reasons.
+   boundary requires them. When the approved package or implementation changes
+   a rendered UI, exercise the affected user flow in a running interface using
+   an available browser test or manual interaction. Check the
+   relevant states, viewport sizes, keyboard/accessibility behavior, and
+   acceptance criteria from the approved package and project context. Unit or
+   snapshot tests alone do not satisfy this UI check. Record the environment,
+   actions, observed results, and evidence in `task.md`. If the approved task
+   list omitted UI testing, add a referenced validation task; use step 4 if
+   this changes a material approved validation decision. Record skipped checks
+   and reasons; leave the UI task open and package `In Progress` when the
+   interface cannot be tested or a check fails.
 7. Inspect the final diff for unrelated work, secrets, local-only files,
    documentation drift, incomplete tasks, and missing acceptance evidence.
    Leave the package `In Progress` and direct the user to

@@ -7,8 +7,9 @@ Explain what changed and why.
 - Spec: <link or `None`>
 - Plan: <link or `None`>
 - Task: <link or `None`>
-- Tracking reference: <ticket URL/ID or `None`>
-- Closing reference: <for example `Closes #123`, or `None`>
+- Tracking reference: <primary spec ticket URL/ID or `None`>
+- Other linked work items: <ticket URLs/IDs from the optional issue index, or `None`>
+- Closing references on merge: <tracker-supported references for fully resolved items when merge is delivery, or `None`>
 - Package approval: <approver/date or `Not applicable`>
 - Spec analysis: <report link or `Not applicable`>
 - Spec verification: <report link or `Not applicable`>
@@ -47,6 +48,7 @@ Explain what changed and why.
 
 - Configured completion point: <merged, deployed, released, or `Not applicable`>
 - Evidence expected for `/close-spec`: <reference or `Not applicable`>
+- Work-item closure plan: <items to verify as closed on merge; items to close after delivery; items to leave open with reasons, or `None`>
 
 ## Evidence
 

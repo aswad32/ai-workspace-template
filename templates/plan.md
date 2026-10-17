@@ -67,6 +67,7 @@ and validation method before approval.
 
 - Focused validation: <command(s) from project context>
 - Broader validation required: <command(s), or `No — reason`>
+- Rendered UI validation: <affected flow, states, viewport and accessibility checks, method, and expected evidence; or `Not applicable`>
 - Manual verification: <scenario(s), or `Not applicable`>
 - Security/privacy validation: <check, or `Not applicable`>
 - Spec-conformance validation: `/verify-spec <spec-slug>`
