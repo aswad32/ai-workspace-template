@@ -28,7 +28,8 @@ Before implementation, confirm all items below.
 Include only applicable task groups. Assign stable IDs without renumbering
 existing tasks. Add source references for buildable work and exact paths when
 known. Use `[supporting]` only for work that has no direct requirement, and state
-why it is necessary.
+why it is necessary. When the package changes a rendered UI, include a separate
+rendered-UI test task with source references and the evidence to capture.
 
 ### <Task Group>
 
@@ -43,6 +44,7 @@ why it is necessary.
 
 - [ ] Run focused checks from project context: <command(s)>.
 - [ ] Run broader checks when the risk/changed boundary requires them: <command(s) or `Not applicable`>.
+- [ ] For applicable or changed UI, exercise the rendered flow and record states, viewport/accessibility checks, environment, and observed results; otherwise record `Not applicable`.
 - [ ] Perform required manual verification: <scenario(s) or `Not applicable`>.
 - [ ] Record skipped checks and the reason.
 

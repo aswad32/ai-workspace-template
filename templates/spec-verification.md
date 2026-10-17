@@ -16,6 +16,9 @@
 
 ## Validation
 
+For applicable or changed UI, include the rendered-UI test result and evidence;
+do not count a planned but unperformed check as a pass.
+
 | Check | Result | Evidence / reason skipped |
 |---|---|---|
 | <command or manual check> | <Pass / Fail / Skipped> | <result> |

@@ -22,7 +22,12 @@ general code review.
    `Not verifiable`.
 4. Run focused, read-safe validation from project context. Run broader checks
    only when the changed boundary requires them. Record skipped or unavailable
-   checks without treating them as passes.
+   checks without treating them as passes. For an applicable or changed UI,
+   require evidence from `/execute` that the rendered interface was exercised
+   against the affected flow and applicable states, viewport, and accessibility
+   expectations. A unit test, snapshot, or unperformed manual plan alone is not
+   UI evidence. Mark uncovered UI obligations as gaps and keep the package
+   `In Progress` until the UI check passes.
 5. Create `reviews/spec-verification-<UTC-timestamp>.md` from
    `templates/spec-verification.md`. Use deterministic finding IDs tied to the
    source, such as `SV-FR-001`; retain IDs across reruns for the same gap.

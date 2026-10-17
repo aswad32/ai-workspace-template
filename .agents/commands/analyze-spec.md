@@ -20,7 +20,10 @@ code.
    unjustified supporting work, missing edge cases, and inconsistent terms.
 4. Check applicable security, privacy, data integrity, compatibility,
    accessibility, reliability, operations, rollout, and documentation concerns
-   against project context. Do not require irrelevant sections.
+   against project context. When the package changes a rendered UI, require a
+   planned rendered-UI test and evidence task covering the affected flow and
+   applicable states, accessibility, and responsive behavior. Treat a missing
+   UI test plan as blocking. Do not require irrelevant sections.
 5. Classify findings as `Blocking`, `Warning`, or `Note`. Use deterministic IDs
    such as `SA-COVERAGE-FR-001`; use a stable category and sequence when no
    source ID exists. A rerun must retain an existing ID for the same issue.

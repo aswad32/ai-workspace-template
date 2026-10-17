@@ -22,6 +22,8 @@ changes belong in the consuming project's own release notes.
 ### Changed
 
 - Package lifecycle now distinguishes `Implemented` from delivered `Done`.
+- UI-related packages now plan and perform rendered-interface testing during
+  execution, with evidence required for passing spec verification.
 - Remediation commands identify their source review explicitly.
 - Project context no longer assumes a base branch, branch convention, tracker,
   pull-request host, or delivery point.
@@ -32,6 +34,9 @@ changes belong in the consuming project's own release notes.
 
 - Fresh template-derived repositories no longer treat unchanged starter
   boilerplate as evidence of the new project's identity or lifecycle state.
+- PR and package closure workflows now reconcile linked work items with the
+  configured delivery point, treat the spec's tracking reference as canonical,
+  and verify tracker closure before marking items done.
 
 ## Upgrade Notes
 
@@ -40,3 +45,6 @@ Existing adopters should merge these changes on a dedicated branch, rerun
 `Approval notification: Not evaluated` to active spec metadata when adopting
 notifications, and leave active packages `Draft` until they have a passing
 analysis and recorded approval.
+For active UI packages, add rendered-interface validation and its evidence before
+`/verify-spec`; rerun analysis and approval if this materially changes an
+accepted validation plan.

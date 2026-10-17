@@ -12,7 +12,7 @@
 - Approved on: <YYYY-MM-DD or `Not approved`>
 - Approval notification: Not evaluated | Not configured | Disabled | Not subscribed | Pending setup: <missing prerequisites> | Not sent: <date and reason> | Sent: <date and non-secret reference> | Failed: <date and reason> | Delivery uncertain: <date and reason>
 - Latest spec analysis: <relative report link or `Not run`>
-- Tracking reference: <ticket URL/ID, or `None`>
+- Tracking reference: <canonical work item linked to this package, or `None`>
 - Project context: `.agents/project-context.md`
 - Supersedes: <spec link(s) or `None`>
 - Superseded by: <spec link or `None`>
